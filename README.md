@@ -1,5 +1,8 @@
 纯面向对象，支持链式操作的时间转换。
 
+
+pip  install chained_mode_time_tool
+
 ```
  时间转换，支持链式操作，纯面向对象的的。
  无限链式操作之后，通过对象的 datetime_obj datetime_str 等属性和方法，取得自己想要的值。
@@ -7,8 +10,8 @@
 相比模块级下面定义几十个函数，然后将不同类型的时间变量传到不同的函数中return结果，然后把结果作为入参传入到另一个函数进行转换，
 纯面向对象支持链式转换的要方便很多。
 
-初始化能够接受的变量类型丰富，可以传入一切类型的时间变量，兼容性和容错度高。
-    
+初始化能够接受的变量类型丰富，可以传入一切类型的时间变量，兼容性和容错度高。::
+
 ``` 
 
 例如不支持链式操作的，并且需要使用不同的函数处理不同的时间变量类型的是这样的
@@ -20,7 +23,7 @@ https://github.com/lishenluo/dtutils/blob/master/DTUtils.py
 ```
 支持链式操作是：
 from modulexx import  DatetimeConverter 
-DatetimeConverter（var).fun1.fun2.fun3.attr
+DatetimeConverter(var).fun1.fun2.fun3.attr
 
 不支持链式是:
 import modulexx
@@ -80,7 +83,8 @@ class DatetimeConverter:
             self.datetime_obj = datetime.datetime.now()
         else:
             raise ValueError('实例化时候的传参不符合规定')
-
+        
+    # 以下为常用的属性
     @property
     def datetime_str(self) -> str:
         return self.datetime_obj.strftime(self.DATETIME_FORMATTER)
