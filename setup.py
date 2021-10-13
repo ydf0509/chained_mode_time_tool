@@ -40,7 +40,7 @@ setup(
         'Topic :: Software Development :: Libraries'
     ],
     install_requires=[
-
+        'pytz'
     ]
 )
 """

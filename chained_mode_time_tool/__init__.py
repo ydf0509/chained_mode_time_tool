@@ -2,7 +2,7 @@ import typing
 import re
 import time
 import datetime
-
+from pytz import timezone
 
 class DatetimeConverter:
     """ 时间转换，支持链式操作，纯面向对象的的。
@@ -27,9 +27,10 @@ class DatetimeConverter:
         datetime_obj = datetime.datetime.strptime(datetime_str, datetime_formatter)
         return cls(datetime_obj)
 
-    def __init__(self, datetimex: typing.Union[None,int, float, datetime.datetime, str, 'DatetimeConverter'] = None):
+    def __init__(self, datetimex: typing.Union[None,int, float, datetime.datetime, str, 'DatetimeConverter'] = None,time_zone='UTC'):
         """
         :param datetimex: 接受时间戳  datatime类型 和 时间字符串 和类对象本身四种类型,如果为None，则默认当前时间。
+        :param time_zone   时区 Asia/Shanghai， UTC 等。
         """
         if isinstance(datetimex, str):
             if not re.match('\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', datetimex):
@@ -40,7 +41,7 @@ class DatetimeConverter:
         elif isinstance(datetimex, (int, float)):
             if datetimex < 1:
                 datetimex += 86400
-            self.datetime_obj = datetime.datetime.fromtimestamp(datetimex)  # 时间戳0在windows会出错。
+            self.datetime_obj = datetime.datetime.fromtimestamp(datetimex,tz=timezone(time_zone))  # 时间戳0在windows会出错。
         elif isinstance(datetimex, datetime.datetime):
             self.datetime_obj = datetimex
         elif isinstance(datetimex, DatetimeConverter):
